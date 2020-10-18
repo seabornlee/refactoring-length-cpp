@@ -1,6 +1,9 @@
 #ifndef REFACTOR_LENGTH_CPP_LENGTH_H
 #define REFACTOR_LENGTH_CPP_LENGTH_H
 
+static const char *const INCH = "inch";
+static const char *const YARD = "yard";
+static const char *const FEET = "feet";
 
 class Length {
 public:

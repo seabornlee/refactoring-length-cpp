@@ -16,23 +16,23 @@ const char *Length::getUnit() {
 
 Length Length::as(const char *targetUnit) {
     Length length = *this;
-    if (strcmp(this->unit, "f") == 0 && strcmp(targetUnit, "inch") == 0) {
+    if (strcmp(this->unit, FEET) == 0 && strcmp(targetUnit, INCH) == 0) {
         length = Length(this->value * 12, targetUnit);
     }
-    if (strcmp(this->unit, "inch") == 0 && strcmp(targetUnit, "f") == 0) {
+    if (strcmp(this->unit, INCH) == 0 && strcmp(targetUnit, FEET) == 0) {
         length = Length(this->value / 12, targetUnit);
     }
 
-    if (strcmp(this->unit, "yard") == 0) {
-        if (strcmp(targetUnit, "inch") == 0) {
+    if (strcmp(this->unit, YARD) == 0) {
+        if (strcmp(targetUnit, INCH) == 0) {
             length = Length(this->value * 36, targetUnit);
-        } else if (strcmp(targetUnit, "f") == 0) {
+        } else if (strcmp(targetUnit, FEET) == 0) {
             length = Length(this->value * 3, targetUnit);
         }
-    } else if (strcmp(targetUnit, "yard") == 0) {
-        if (strcmp(this->unit, "f") == 0) {
+    } else if (strcmp(targetUnit, YARD) == 0) {
+        if (strcmp(this->unit, FEET) == 0) {
             length = Length(this->value / 3, targetUnit);
-        } else if (strcmp(this->unit, "inch") == 0) {
+        } else if (strcmp(this->unit, INCH) == 0) {
             length = Length(this->value / 36, targetUnit);
         }
     }
