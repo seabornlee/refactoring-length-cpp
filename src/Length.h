@@ -4,17 +4,17 @@
 
 class Length {
 public:
-    Length(double val, const char *uinnt);
+    Length(double value, const char *unit);
 
-    Length as(const char *u);
+    Length as(const char *targetUnit);
 
-    double getVal();
+    double getValue();
 
-    const char * getUinnt();
+    const char * getUnit();
 
 private:
-    double val;
-    const char *uinnt;
+    double value;
+    const char *unit;
 };
 
 #endif //REFACTOR_LENGTH_CPP_LENGTH_H
