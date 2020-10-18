@@ -1,42 +1,41 @@
-#include <cstring>
 #include "Length.h"
-
-Length::Length(double value, const char *unit) {
-    this->value = value;
-    this->unit = unit;
-}
 
 double Length::getValue() {
     return this->value;
 }
 
-const char *Length::getUnit() {
-    return this->unit;
-}
-
-Length Length::as(const char *targetUnit) {
+Length Length::as(Unit targetUnit) const {
     Length length = *this;
-    if (strcmp(this->unit, FEET) == 0 && strcmp(targetUnit, INCH) == 0) {
-        length = Length(this->value * 12, targetUnit);
+    if (unit == Feet && targetUnit == Inch) {
+        length = Length(value * 12, targetUnit);
     }
-    if (strcmp(this->unit, INCH) == 0 && strcmp(targetUnit, FEET) == 0) {
-        length = Length(this->value / 12, targetUnit);
+    if (unit == Inch && targetUnit == Feet) {
+        length = Length(value / 12, targetUnit);
     }
 
-    if (strcmp(this->unit, YARD) == 0) {
-        if (strcmp(targetUnit, INCH) == 0) {
-            length = Length(this->value * 36, targetUnit);
-        } else if (strcmp(targetUnit, FEET) == 0) {
-            length = Length(this->value * 3, targetUnit);
+    if (unit == Yard) {
+        if (targetUnit == Inch) {
+            length = Length(value * 36, targetUnit);
+        } else if (targetUnit == Feet) {
+            length = Length(value * 3, targetUnit);
         }
-    } else if (strcmp(targetUnit, YARD) == 0) {
-        if (strcmp(this->unit, FEET) == 0) {
-            length = Length(this->value / 3, targetUnit);
-        } else if (strcmp(this->unit, INCH) == 0) {
-            length = Length(this->value / 36, targetUnit);
+    } else if (targetUnit == Yard) {
+        if (unit == Feet) {
+            length = Length(value / 3, targetUnit);
+        } else if (unit == Inch) {
+            length = Length(value / 36, targetUnit);
         }
     }
     return length;
+}
+
+Length::Length(double value, Unit unit) {
+    this->value = value;
+    this->unit = unit;
+}
+
+Unit Length::getUnit() {
+    return unit;
 }
 
 
