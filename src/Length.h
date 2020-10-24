@@ -15,6 +15,8 @@ public:
 private:
     double value;
     Unit unit;
+
+    double newValueIn(const Unit &targetUnit) const;
 };
 
 #endif //REFACTOR_LENGTH_CPP_LENGTH_H

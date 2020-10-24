@@ -5,28 +5,35 @@ double Length::getValue() {
 }
 
 Length Length::as(Unit targetUnit) const {
-    Length length = *this;
+    return Length(newValueIn(targetUnit), targetUnit);
+}
+
+double Length::newValueIn(const Unit &targetUnit) const {
+    double newValue = value;
     if (unit == Feet && targetUnit == Inch) {
-        length = Length(value * 12, targetUnit);
-    }
-    if (unit == Inch && targetUnit == Feet) {
-        length = Length(value / 12, targetUnit);
+        newValue = value * 12;
     }
 
-    if (unit == Yard) {
-        if (targetUnit == Inch) {
-            length = Length(value * 36, targetUnit);
-        } else if (targetUnit == Feet) {
-            length = Length(value * 3, targetUnit);
-        }
-    } else if (targetUnit == Yard) {
-        if (unit == Feet) {
-            length = Length(value / 3, targetUnit);
-        } else if (unit == Inch) {
-            length = Length(value / 36, targetUnit);
-        }
+    if (unit == Feet && targetUnit == Yard) {
+        newValue = value / 3;
     }
-    return length;
+
+    if (unit == Inch && targetUnit == Feet) {
+        newValue = value / 12;
+    }
+
+    if (unit == Inch && targetUnit == Yard) {
+        newValue = value / 36;
+    }
+
+    if (unit == Yard && targetUnit == Inch) {
+        newValue = value * 36;
+    }
+
+    if (unit == Yard && targetUnit == Feet) {
+        newValue = value * 3;
+    }
+    return newValue;
 }
 
 Length::Length(double value, Unit unit) {
